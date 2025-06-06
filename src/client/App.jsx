@@ -29,7 +29,12 @@ export default function App() {
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
 
-      if (data.type === 'message') {
+      if (
+        data.type === 'message' &&
+        typeof data.text === 'string' &&
+        typeof data.author === 'string' &&
+        typeof data.time === 'string'
+      ) {
         setMessages((prev) => [...prev, data]);
       }
     };
